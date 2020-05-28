@@ -11,11 +11,11 @@ from deap import algorithms
 import multiprocessing
 import time
 
-random.seed(1)
-POP_SIZE = 100
-OFFSPRING_SIZE = 100
+random.seed(time.time)
+POP_SIZE =  100
+OFFSPRING_SIZE = 50
 
-NGEN = 15
+NGEN = 70
 ALPHA = POP_SIZE
 MU = OFFSPRING_SIZE
 LAMBDA = OFFSPRING_SIZE
@@ -25,10 +25,10 @@ ETA = 10.0
 
 SELECTOR = "NSGA2"
 
-IND_SIZE = 5
-LOWER, UPPER = [0, 0, 0, 0, 0], [2.0, 50.0, 2.0, 1.5, 100] 
+IND_SIZE =17
+LOWER, UPPER = [0, 0, 0, 0,0, 0, 0, 0, 0, -20, 1, -20, .5,-20, .5, 0.5, 0.5], [1.0, 5, 3.0, 3.0, 100, 1.0, 1.0, 1000, 500, 20, 2, 20, 2, 20, 2, 2, 2] 
 
-creator.create("Fitness", base.Fitness, weights=[-1.0] * 6)
+creator.create("Fitness", base.Fitness, weights=[-100.0, -100.0, -1.0, -1.0, -1.0, -100.0])
 creator.create("Individual", list, fitness=creator.Fitness)
 
 
@@ -52,8 +52,8 @@ toolbox.register(
 toolbox.register("population", tools.initRepeat, list, toolbox.Individual)
 
 
-import deap_LP_eval
-toolbox.register("evaluate",  deap_LP_eval.evaluate)
+import deap_LP_eval2
+toolbox.register("evaluate",  deap_LP_eval2.evaluate)
 
 toolbox.register(
     "mate",
